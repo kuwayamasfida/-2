@@ -129,7 +129,8 @@ body {
 .cta-buttons-overlay button:disabled {
   background-color: #ccc;
   border-color: #ccc;
-  cursor: not-allowed;
+  /* ★修正箇所: カーソルをデフォルト（通常の矢印）に強制する */
+  cursor: default !important; 
   opacity: var(--cta-opacity-disabled); 
 }
 
