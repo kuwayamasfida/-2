@@ -16,8 +16,6 @@
   --cta-min-width: 8vw;             /* サイズ: vw で連動 */
   --cta-font-size: 1.4vh;           /* サイズ: vh で連動 */
   --cta-border-radius: 5px;
-  
-  /* ★透明度★ */
   --cta-opacity-enabled: 1.0;
   --cta-opacity-disabled: 0.6;
 
@@ -28,27 +26,28 @@
   --fs-padding-y: 0.7vh;            /* サイズ: vh で連動 */
   --fs-padding-x: 1.5vw;            /* サイズ: vw で連動 */
   --fs-font-size: 1.5vh;            /* サイズ: vh で連動 */
-
-  /* ★透明度★ */
   --fs-opacity-enabled: 1.0;
 }
 
 /* ======================== */
-/* 全体のリセットと body スタイル */
+/* 共通コンテナのスタイル (bodyとhtmlの高さを追加) */
 /* ======================== */
-body {
+html, body {
+    /* ★追加: ページ全体の高さを確保し、vh/vwを正しく機能させる */
+    height: 100%;
     margin: 0;
     padding: 0;
+}
+body {
     box-sizing: border-box;
     font-family: sans-serif;
+    /* bodyの高さが確保されているため、動画が小さすぎる問題を緩和 */
 }
 
-/* ======================== */
-/* 共通コンテナのスタイル */
-/* ======================== */
+/* 動画が小さい問題を解決するため max-width を維持 */
 .video-container {
   position: relative;
-  max-width: 800px;
+  max-width: 800px; 
   margin: 0 auto;
   background-color: black;
 }
@@ -137,17 +136,15 @@ body {
 /* ======================== */
 /* 全画面表示時のスタイル (ズレ解消処理) */
 /* ======================== */
-/* .video-container が全画面表示のターゲット */
 .video-container:fullscreen {
   width: 100%;
   height: 100%;
   max-width: none;
-  display: flex; /* 子要素（.video-wrapper）を中央に配置 */
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* 全画面中、.video-wrapperを Flexアイテムとして動作させる */
 .video-container:fullscreen .video-wrapper {
   position: static; 
   width: 100%;
@@ -161,9 +158,8 @@ body {
   align-items: center;
 }
 
-/* 全画面中、動画要素自体に object-fit: contain; を設定してアスペクト比を維持 */
 .video-container:fullscreen #myVideo {
-  position: relative; /* CTAボタンの基準とする */
+  position: relative;
   width: auto;
   height: auto;
   max-width: 100%;
@@ -171,7 +167,6 @@ body {
   object-fit: contain;
 }
 
-/* 全画面表示時のボタンコンテナの位置は、親要素（.video-wrapper）に依存 */
 .video-container:fullscreen .fullscreen-button-top-right,
 .video-container:fullscreen .cta-buttons-overlay {
     position: absolute;
