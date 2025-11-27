@@ -4,31 +4,43 @@
 :root {
   /* --- 全般 --- */
   --z-index-overlay: 2147483647;
-  --video-aspect-ratio: 56.25%; /* 16:9 の場合 */
+  --video-aspect-ratio: 56.25%; /* 16:9 の場合: (9 / 16) * 100% = 56.25% */
   
   /* --- CTAボタン群 --- */
-  --cta-right-position: 3%;         /* ★位置は % に戻す★ */
-  --cta-gap: 1.0vh;                 /* サイズは vh で連動 */
+  --cta-right-position: 3%;         /* ★位置: 親要素に対する % */
+  --cta-gap: 1.0vh;                 /* サイズ: vh で連動 */
   --cta-bg-color: #007bff;
   --cta-text-color: white;
-  --cta-padding-y: 0.8vh;           /* サイズは vh で連動 */
-  --cta-padding-x: 1.8vw;           /* サイズは vw で連動 */
-  --cta-min-width: 8vw;             /* サイズは vw で連動 */
-  --cta-font-size: 1.4vh;           /* ★調整: フォントサイズを 1.4vh に */
+  --cta-padding-y: 0.8vh;           /* サイズ: vh で連動 */
+  --cta-padding-x: 1.8vw;           /* サイズ: vw で連動 */
+  --cta-min-width: 8vw;             /* サイズ: vw で連動 */
+  --cta-font-size: 1.4vh;           /* サイズ: vh で連動 */
   --cta-border-radius: 5px;
   
+  /* ★透明度★ */
   --cta-opacity-enabled: 1.0;
   --cta-opacity-disabled: 0.6;
 
   /* --- 全画面ボタン --- */
-  --fs-top-position: 2%;            /* ★位置は % に戻す★ */
-  --fs-right-position: 2%;          /* ★位置は % に戻す★ */
+  --fs-top-position: 2%;            /* ★位置: 親要素に対する % */
+  --fs-right-position: 2%;          /* ★位置: 親要素に対する % */
   --fs-bg-color: #ff9900;
-  --fs-padding-y: 0.7vh;            /* サイズは vh で連動 */
-  --fs-padding-x: 1.5vw;            /* サイズは vw で連動 */
-  --fs-font-size: 1.5vh;            /* サイズは vh で連動 */
+  --fs-padding-y: 0.7vh;            /* サイズ: vh で連動 */
+  --fs-padding-x: 1.5vw;            /* サイズ: vw で連動 */
+  --fs-font-size: 1.5vh;            /* サイズ: vh で連動 */
 
+  /* ★透明度★ */
   --fs-opacity-enabled: 1.0;
+}
+
+/* ======================== */
+/* 全体のリセットと body スタイル */
+/* ======================== */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 /* ======================== */
@@ -46,7 +58,7 @@
   position: relative; 
   width: 100%;
   height: 0;
-  padding-bottom: var(--video-aspect-ratio);
+  padding-bottom: var(--video-aspect-ratio); /* 動画の縦横比を維持 */
 }
 
 #myVideo {
@@ -63,7 +75,6 @@
 /* ======================== */
 .fullscreen-button-top-right {
   position: absolute;
-  /* 位置は % でラッパーの大きさに追従 */
   top: var(--fs-top-position);       
   right: var(--fs-right-position);   
   z-index: var(--z-index-overlay);
@@ -71,7 +82,6 @@
 }
 
 #btn-fullscreen {
-  /* サイズは vw/vh で画面に連動 */
   padding: var(--fs-padding-y) var(--fs-padding-x);
   font-size: var(--fs-font-size);
   cursor: pointer;
@@ -93,18 +103,16 @@
 .cta-buttons-overlay {
   position: absolute; 
   top: 50%;
-  /* 位置は % でラッパーの大きさに追従 */
   right: var(--cta-right-position);   
   transform: translateY(-50%);
   display: flex;
   flex-direction: column; 
-  gap: var(--cta-gap); /* サイズは vh で連動 */
+  gap: var(--cta-gap);
   z-index: var(--z-index-overlay);
 }
 
 /* CTAボタン共通スタイル */
 .cta-buttons-overlay button {
-  /* サイズは vw/vh で画面に連動 */
   padding: var(--cta-padding-y) var(--cta-padding-x);
   font-size: var(--cta-font-size);
   cursor: pointer;
@@ -127,14 +135,14 @@
 }
 
 /* ======================== */
-/* 全画面表示時のスタイル (ラッパーを中央に配置し、ズレを解消) */
+/* 全画面表示時のスタイル (ズレ解消処理) */
 /* ======================== */
 /* .video-container が全画面表示のターゲット */
 .video-container:fullscreen {
   width: 100%;
   height: 100%;
   max-width: none;
-  display: flex;
+  display: flex; /* 子要素（.video-wrapper）を中央に配置 */
   justify-content: center;
   align-items: center;
 }
